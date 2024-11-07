@@ -1,29 +1,35 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react'; 
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>App Navegación N°3</Text>
+      <Text style={styles.title}>Seleccione una opción:</Text>
 
-      {/* Icono de Home */}
-      <TouchableOpacity
-        style={styles.iconContainer}
-        onPress={() => navigation.navigate('Inicio')}
-      >
-        <Icon name="home" size={50} color="#FFA500" />
-        <Text style={styles.iconText}>Home</Text>
-      </TouchableOpacity>
+      <View style={styles.iconRow}>
+        {/* Botón de Home */}
+        <Pressable
+          style={styles.iconWrapper}
+          onPress={() => navigation.navigate('Inicio')} // Dirige a InicioScreen
+        >
+          <View style={[styles.iconContainer, styles.homeButton]}>
+            <Icon name="home" size={30} color="#FFFFFF" />
+          </View>
+          <Text style={styles.iconText}>Home</Text>
+        </Pressable>
 
-      {/* Icono de Settings */}
-      <TouchableOpacity
-        style={styles.iconContainer}
-        onPress={() => navigation.navigate('Configuración')}
-      >
-        <Icon name="cog" size={50} color="#FFA500" />
-        <Text style={styles.iconText}>Settings</Text>
-      </TouchableOpacity>
+        {/* Botón de Settings */}
+        <Pressable
+          style={styles.iconWrapper}
+          onPress={() => navigation.navigate('Configuración')} //dirige ConfiguracionScreen
+        >
+          <View style={[styles.iconContainer, styles.settingsButton]}>
+            <Icon name="cog" size={30} color="#FFFFFF" />
+          </View>
+          <Text style={styles.iconText}>Settings</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -33,21 +39,38 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000', // Fondo beige claro
+    backgroundColor: '#FFFFFF',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 40,
-    color: '#FFA500',
+    marginBottom: 20,
+    color: '#000000',
+  },
+  iconRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '60%',
+  },
+  iconWrapper: {
+    alignItems: 'center',
+    marginHorizontal: 20,
   },
   iconContainer: {
+    padding: 20,
+    borderRadius: 50,
     alignItems: 'center',
-    marginBottom: 30,
+    justifyContent: 'center',
+  },
+  homeButton: {
+    backgroundColor: '#FFA500', // Color amarillo-naranja
+  },
+  settingsButton: {
+    backgroundColor: '#40E0D0', // Color turquesa 
   },
   iconText: {
     fontSize: 16,
-    color: '#FFA500',
+    color: '#000000', // Texto en negro
     marginTop: 8,
   },
 });

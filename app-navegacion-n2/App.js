@@ -1,28 +1,35 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
+  const [liked, setLiked] = useState(false);
+
+  const toggleLike = () => {
+    setLiked(!liked);
+  };
+
   return (
     <LinearGradient
-      colors={['#000000', '#FFA500']} // Gradiente de negro a naranja
+      colors={['#000000', '#FFA500']} // Gradiente de negro/naranja
       style={styles.container}
     >
-      {/* Portada del Álbum */}
+      {/* Portada */}
       <View style={styles.albumContainer}>
         <Image
-          source={{ uri: 'https://i.scdn.co/image/ab67616d0000b273182fe5b5d3e3c3fcc895a3c8' }} // Imagen de álbum simulada
+          source={{ uri: 'https://i.scdn.co/image/ab67616d0000b273182fe5b5d3e3c3fcc895a3c8' }} // Imagen de álbum de Avicii
           style={styles.albumImg}
         />
         <Text style={styles.titulo}>Wake Me Up</Text>
         <Text style={styles.artista}>Avicii</Text>
       </View>
       
-      {/* Icono de Me Gusta */}
-      <View style={styles.likeContainer}>
-        <Icon name="heart" size={30} color="#FF0000" />
-      </View>
+      {/* Uso de TouchableOpacity por comodidad */}
+      {/* Icono de Like */}
+      <TouchableOpacity onPress={toggleLike} style={styles.likeContainer}> 
+        <Icon name="heart" size={30} color={liked ? '#FF0000' : '#333333'} />
+      </TouchableOpacity>
 
       {/* Controles de Reproducción */}
       <View style={styles.controlsContainer}>
